@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Schedule } from "../components/Schedule";
+import { useApplicationData } from "../contexts/ApplicationDataContext";
 import LeagueService from "../services/LeagueService";
 
 function PageSchedule() {
-  const [data, setData] = useState([]);
+  const { setScheduleData, setLeaderboardData, schedule } =
+    useApplicationData();
 
-  async function handle(leagueService) {
-    await leagueService.fetchData();
-    await leagueService.getLeaderboard();
-    setData(leagueService.getMatches());
+  async function handle() {
+    if (schedule.length === 0) {
+      const leagueService = new LeagueService();
+      await leagueService.fetchData();
+      setScheduleData(leagueService.getMatches());
+      setLeaderboardData(leagueService.getLeaderboard());
+    }
   }
 
   useEffect(() => {
-    const leagueService = new LeagueService();
-    handle(leagueService);
-  }, []);
+    handle();
+  }, [schedule]);
 
-  return <>{data.length > 0 && <Schedule matches={data} />}</>;
+  return <>{schedule.length > 0 && <Schedule matches={schedule} />}</>;
 }
 
 export { PageSchedule };

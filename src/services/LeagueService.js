@@ -9,6 +9,7 @@
 class LeagueService {
   constructor() {
     this.matches = [];
+    this.leaderboard = [];
   }
   /**
    * Sets the match schedule.
@@ -79,67 +80,84 @@ class LeagueService {
    * @returns {Array} List of teams representing the leaderboard.
    */
   getLeaderboard() {
-    let teams = [];
+    let games = [];
 
     this.matches.forEach((match) => {
-      if (teams.length === 0) {
-        teams.push(
-          {
-            teamName: match.awayTeam,
-            matchesPlayed: 1,
-            goalsFor: match.awayTeamScore,
-            goalsAgainst: match.awayTeamScore,
-            points:
-              match.homeTeamScore < match.awayTeamScore
-                ? 3
-                : match.homeTeamScore === match.awayTeamScore
-                ? 1
-                : 0,
-          },
-          {
-            teamName: match.homeTeam,
-            matchesPlayed: 1,
-            goalsFor: match.homeTeamScore,
-            goalsAgainst: match.homeTeamScore,
-            points:
-              match.homeTeamScore > match.awayTeamScore
-                ? 3
-                : match.homeTeamScore === match.awayTeamScore
-                ? 1
-                : 0,
-          }
-        );
-      } else {
-        if (!teams.find((team) => team.teamName === match.homeTeam)) {
-          teams.push({
-            teamName: match.homeTeam,
-            matchesPlayed: 1,
-            goalsFor: match.homeTeamScore,
-            goalsAgainst: match.homeTeamScore,
-            points:
-              match.homeTeamScore > match.awayTeamScore
-                ? 3
-                : match.homeTeamScore === match.awayTeamScore
-                ? 1
-                : 0,
-          });
-        } else if (!teams.find((team) => team.teamName === match.awayTeam)) {
-          teams.push({
-            teamName: match.awayTeam,
-            matchesPlayed: 1,
-            goalsFor: match.awayTeamScore,
-            goalsAgainst: match.awayTeamScore,
-            points:
-              match.homeTeamScore < match.awayTeamScore
-                ? 3
-                : match.homeTeamScore === match.awayTeamScore
-                ? 1
-                : 0,
-          });
-        }
+      if (match.homeTeamScore !== null) {
+        games.push({
+          teamName: match.homeTeam,
+          matchesPlayed: 1,
+          goalsFor: match.homeTeamScore,
+          goalsAgainst: match.awayTeamScore,
+          points:
+            match.homeTeamScore > match.awayTeamScore
+              ? 3
+              : match.homeTeamScore === match.awayTeamScore
+              ? 1
+              : 0,
+        });
+
+        games.push({
+          teamName: match.awayTeam,
+          matchesPlayed: 1,
+          goalsFor: match.awayTeamScore,
+          goalsAgainst: match.homeTeamScore,
+          points:
+            match.homeTeamScore < match.awayTeamScore
+              ? 3
+              : match.homeTeamScore === match.awayTeamScore
+              ? 1
+              : 0,
+        });
       }
     });
-    console.log(teams);
+
+    games.forEach((game) => {
+      let teamName = "";
+      let matchesPlayed = 0;
+      let goalsFor = 0;
+      let goalsAgainst = 0;
+      let points = 0;
+
+      games.forEach((team) => {
+        if (team.teamName === game.teamName) {
+          teamName = team.teamName;
+          matchesPlayed++;
+          goalsFor += team.goalsFor;
+          goalsAgainst += team.goalsAgainst;
+          team.goalsFor > team.goalsAgainst
+            ? (points += team.points)
+            : team.goalsFor === team.goalsAgainst
+            ? (points += team.points)
+            : (points += team.points);
+        }
+      });
+      if (
+        this.leaderboard.find((team) => team.teamName === teamName) ===
+        undefined
+      ) {
+        this.leaderboard.push({
+          teamName: teamName,
+          matchesPlayed: matchesPlayed,
+          goalsFor: goalsFor,
+          goalsAgainst: goalsAgainst,
+          points: points,
+        });
+      }
+    });
+
+    this.leaderboard.sort((a, b) => {
+      let x = a.teamName.toUpperCase(),
+        y = b.teamName.toUpperCase();
+      return x === y ? 0 : x > y ? 1 : -1;
+    });
+
+    this.leaderboard.sort((a, b) => {
+      if (a.goalsFor - a.goalsAgainst > b.goalsFor - b.goalsAgainst) return -1;
+      if (a.points > b.points) return -1;
+    });
+
+    return this.leaderboard;
   }
 
   /**

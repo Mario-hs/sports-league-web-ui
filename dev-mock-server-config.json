@@ -26,7 +26,7 @@
                         "homeTeam": "Switzerland",
                         "awayTeam": "Serbia",
                         "matchPlayed": true,
-                        "homeTeamScore": 2,
+                        "homeTeamScore": 0,
                         "awayTeamScore": 2
                     },
                     {
@@ -35,8 +35,8 @@
                         "homeTeam": "Serbia",
                         "awayTeam": "Cameroon",
                         "matchPlayed": true,
-                        "homeTeamScore": 0,
-                        "awayTeamScore": 1
+                        "homeTeamScore": 1,
+                        "awayTeamScore": 2
                     },
                     {
                         "matchDate": 1651744228685,
@@ -44,8 +44,8 @@
                         "homeTeam": "Brazil",
                         "awayTeam": "Switzerland",
                         "matchPlayed": true,
-                        "homeTeamScore": 3,
-                        "awayTeamScore": 0
+                        "homeTeamScore": 4,
+                        "awayTeamScore": 2
                     },
                     {
                         "matchDate": 1651744228685,
@@ -53,8 +53,8 @@
                         "homeTeam": "Brazil",
                         "awayTeam": "Cameroon",
                         "matchPlayed": true,
-                        "homeTeamScore": 4,
-                        "awayTeamScore": 4
+                        "homeTeamScore": null,
+                        "awayTeamScore": null
                     },
                     {
                         "matchDate": 1651744228685,

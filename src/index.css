@@ -83,16 +83,19 @@ body {
   width: 80%;
 }
 
-/* MAIN */
+/* /* MAIN */
 
 .container {
   width: 90%;
+  height: 100%;
   margin: auto;
 }
 
-.container table {
+table {
   width: 100%;
   border-collapse: collapse;
+  max-width: 900px;
+  margin: auto;
 }
 
 .title_table {
@@ -110,55 +113,55 @@ thead {
   background-color: #E4EDF2;
 }
 
-thead th {
+.table_schedule thead th {
   padding: 0px 10px;
 }
 
-thead th:nth-child(1){
+.table_schedule thead th:nth-child(1) {
   width:"15%";
 }
 
-thead th:nth-child(2){
+.table_schedule thead th:nth-child(2) {
   width:"20%";
 }
 
-thead th:nth-child(3){
+.table_schedule thead th:nth-child(3) {
   width:"30.5%";
+  text-align: right;
 }
 
-thead th:nth-child(4){
+.table_schedule thead th:nth-child(4) {
   width:"15%";
 }
 
-thead th:nth-child(5){
+.table_schedule thead th:nth-child(5) {
+  text-align: left;
   width:"30.5%";
 }
 
-tbody{
+tbody {
   font-size: 14px;
-
 }
 
-tbody tr{
+tbody tr {
   height: 70px;
 }
 
-tbody td {
+.table_schedule tbody td {
   padding: 0 20px;
 }
 
-tbody td:nth-child(2n+1){
+.table_schedule tbody td:nth-child(2n+1) {
   text-align: end;
-
 }
 
-tbody td:nth-child(4){
+.table_schedule tbody td:nth-child(4) {
   text-align:center;
-  font-size: 16;
+  font-size: 16px;
   font-weight: bold;
 }
 
-tbody td:last-child{
+.table_schedule tbody td:last-child {
   text-align: inherit;
 }
 
@@ -166,18 +169,18 @@ tbody > tr:nth-of-type(even) {
   background-color: #F6F7F7;
 }
 
-.container_flag_left, .container_flag_right{
+.table_schedule .container_flag_left, .table_schedule .container_flag_right, .table_leaderboards .team_name_flag  {
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
   gap: 12px;
   height: inherit;
-  font-size: 16;
+  font-size: 16px;
   font-weight: bold;
 }
 
-.container_flag_right{
+.table_schedule .container_flag_right {
   justify-content: flex-start;
 }
 
@@ -186,49 +189,87 @@ tbody > tr:nth-of-type(even) {
   height: 37px;
 }
 
-@media (max-width: 750px) and (min-height: 700px){
+.point {
+  color: #025FEB;
+  font-size: 16px;
+  font-weight: bold;
+}
 
-  thead th:nth-child(1){
+.table_leaderboards td {
+  text-align-last: center;
+}
+
+.table_leaderboards th:nth-child(1){
+  text-align-last: left;
+  padding-left: 15px;
+  width: 50%;
+}
+
+.table_leaderboards th:nth-child(2), 
+.table_leaderboards th:nth-child(3),
+.table_leaderboards th:nth-child(4), 
+.table_leaderboards th:nth-child(5){
+  width: 10%;
+}
+
+.table_leaderboards .team_name_flag {
+  justify-content: flex-start;
+  margin-left: 15px;
+}
+  
+.table_leaderboards .goal_difference {
+  display: none;
+}
+
+@media (max-width: 750px) and (min-height: 700px) {
+
+  .table_schedule thead th:nth-child(1) {
     width:"15%";
   }
   
-  thead th:nth-child(2){
+  .table_schedule thead th:nth-child(2) {
+    display: none;
+  }
+
+  .table_schedule thead th:nth-child(3) {
+    width:"30.5%";
+  }
+  
+  .table_schedule thead th:nth-child(4) {
+    width:"15%";
+  }
+  
+  .table_schedule thead th:nth-child(5) {
+    width:"30.5%";
+  }
+
+  .table_schedule tbody td:nth-child(2) {
     display: none;
     width:"0%";
   }
 
-  thead th:nth-child(3){
-    width:"30.5%";
-  }
-  
-  thead th:nth-child(4){
-    width:"15%";
-  }
-  
-  thead th:nth-child(5){
-    width:"30.5%";
-  }
-
-  tbody td:nth-child(2){
-    display: none;
-    width:"0%";
-  }
-
-  tbody td {
+  .table_schedule tbody td {
     padding: 0 10px;
   }
 }
 
-@media (max-width: 500px) and (min-height: 700px){
+@media (max-width: 500px) and (min-height: 700px) {
 
-  thead th:nth-child(1){
+  .table_schedule thead th:nth-child(1) {
     display: none;
-    width:"0%";
   }
 
-  tbody td:nth-child(1){
+  .table_schedule tbody td:nth-child(1) {
     display: none;
-    width:"0%";
+  }
+
+  .table_leaderboards thead th:nth-child(3), .table_leaderboards thead th:nth-child(4),
+  .table_leaderboards tbody td:nth-child(3), .table_leaderboards tbody td:nth-child(4){
+    display: none;
+  }
+
+  .table_leaderboards .goal_difference {
+    display: table-cell;
   }
 
 }

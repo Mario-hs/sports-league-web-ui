@@ -3,7 +3,7 @@ import React from "react";
 function Schedule({ matches }) {
   return (
     <main className="container">
-      <table>
+      <table className="table_schedule">
         <caption className="title_table">League Schedule</caption>
         <thead>
           <tr>
@@ -32,7 +32,8 @@ function Schedule({ matches }) {
                     />
                   </td>
                   <td>
-                    {match.homeTeamScore} : {match.awayTeamScore}
+                    {match.homeTeamScore === null ? "-" : match.homeTeamScore} :{" "}
+                    {match.awayTeamScore === null ? "-" : match.awayTeamScore}
                   </td>
                   <td className="container_flag_right">
                     <img
